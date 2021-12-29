@@ -1,12 +1,17 @@
-def substrings (string, dictionary)
-  dictionary.reduce(Hash.new(0)) do |hash, word|
-    hash[word] += 1 if string.include? word
-    hash
+def substrings(phrase, dictionary)
+  output = Hash.new(0)
+  phrase.downcase.split(' ').each do |string|
+    dictionary.reduce(output) do |hash, word|
+      hash[word] += 1 if string.include? word
+      hash
+    end
   end
+  output
 end
 
-## single word
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
+
+## single word
 input = "below"
 output = { "below" => 1, "low" => 1 }
 puts substrings(input, dictionary) == output
