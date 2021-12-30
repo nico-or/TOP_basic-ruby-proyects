@@ -1,7 +1,6 @@
 def bubble_sort(array)
   sorted = array.clone
-  done = false
-  until done
+  loop do
     done = true
     sorted[0...sorted.length - 1].each_index do |idx|
       if sorted[idx] > sorted[idx+1]
@@ -9,6 +8,7 @@ def bubble_sort(array)
         done = false
       end
     end
+    break if done
   end
   sorted
 end
