@@ -23,4 +23,17 @@ class Board
   def parse_move(move)
     [move[0].ord - 'a'.ord, move[1].to_i - 1]
   end
+
+  public
+  def valid_move?(move)
+    valid_moves = (
+      (('a'..'c').to_a).product(('1'..'3').to_a)
+    ).map { |i| i.join('') }
+    return false unless valid_moves.include? move
+
+    column, row = parse_move(move)
+    return false unless @board[row][column] == " "
+
+    return true
+  end
 end
