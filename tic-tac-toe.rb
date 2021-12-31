@@ -41,3 +41,29 @@ class Board
     false
   end
 end
+
+# game loop
+def turn(board, player_number)
+  char  = player_number == 1 ? 'x' : 'o'
+  print "Player #{player_number} (#{char}), enter your move: "
+  loop do
+    move = gets.chomp
+    if board.valid_move? move
+      board.add_move(move,char)
+      break
+    else
+      print "Invalid move, try again "
+    end
+  end
+end
+
+def main
+  board = Board.new
+  player_number = 1
+  until board.winner?
+    turn(board, player_number)
+    player_number = player_number == 1 ? 2 : 1
+  end
+end
+
+main
