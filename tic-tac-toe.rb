@@ -5,10 +5,10 @@ class Board
   end
 
   def show
-    puts "  A B C"
+    puts "   a   b   c "
     @board.each_with_index do |row, index|
-      puts (index+1).to_s + ' ' + row.join('|')
-      puts '  ' + '-'*5 unless index == 2
+      puts (index+1).to_s + '  ' + row.join(' | ')
+      puts '  ' + Array.new(3,'---').join('+')  unless index == 2
     end
     puts
   end
@@ -21,6 +21,6 @@ class Board
 
   private
   def parse_move(move)
-    [move[0].ord - 'A'.ord, move[1].to_i - 1]
+    [move[0].ord - 'a'.ord, move[1].to_i - 1]
   end
 end
