@@ -5,7 +5,7 @@ class Board
     @available_moves = (
       (('a'..'c').to_a).product(('1'..'3').to_a)
     ).map { |i| i.join('') }
-    @winner = nil
+    @winner = 'player'
   end
 
   def show
@@ -22,6 +22,10 @@ class Board
     @board[row][column] = char
     @available_moves.delete(move)
     self.show
+  end
+
+  def winner
+    @winner
   end
 
   private
@@ -95,10 +99,16 @@ end
 
 def main
   board = Board.new
-  player_number = 1
+  player_number = 2
   until board.gameover?
-    turn(board, player_number)
     player_number = player_number == 1 ? 2 : 1
+    turn(board, player_number)
+  end
+  puts "GAME OVER"
+  if board.winner == 'tie'
+    puts "It's a tie"
+  else
+    puts "Winner: player #{player_number}"
   end
 end
 
