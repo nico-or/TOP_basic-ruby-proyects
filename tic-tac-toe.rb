@@ -2,6 +2,10 @@ class Board
   def initialize
     @board = Array.new(3) { Array.new(3, ' ') }
     self.show
+    @available_moves = (
+      (('a'..'c').to_a).product(('1'..'3').to_a)
+    ).map { |i| i.join('') }
+    @winner = nil
   end
 
   def show
@@ -16,6 +20,7 @@ class Board
   def add_move(move, char)
     column, row = parse_move(move)
     @board[row][column] = char
+    @available_moves.delete(move)
     self.show
   end
 
@@ -26,15 +31,8 @@ class Board
 
   public
   def valid_move?(move)
-    valid_moves = (
-      (('a'..'c').to_a).product(('1'..'3').to_a)
-    ).map { |i| i.join('') }
-    return false unless valid_moves.include? move
-
-    column, row = parse_move(move)
-    return false unless @board[row][column] == " "
-
-    return true
+    return false unless @available_moves.include? move
+    true
   end
 
   def winner?
