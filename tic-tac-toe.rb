@@ -35,7 +35,45 @@ class Board
     true
   end
 
-  def winner?
+  private
+  def tie?
+    if @available_moves.length == 0
+      @winner = 'tie'
+      return true
+    end
+    false
+  end
+
+  def allsame? (row)
+    return false if row[0] == " "
+    row.all? {|i| i == row[0]}
+  end
+
+  def row_win?
+    @board.each do |row|
+      return true if self.allsame? row
+    end
+    false
+  end
+
+  def column_win?
+    @board.transpose.any? do |row|
+      return true if self.allsame? row
+    end
+    false
+  end
+
+  def diagonal_win?
+    diag1 = (0..2).map {|i| @board.dig(i, i)}
+    diag2 = (0..2).map {|i| @board.dig(2 - i, i)}
+    self.allsame?(diag1) || self.allsame?(diag2)
+  end
+
+  public
+  def gameover?
+    if  self.tie? || self.row_win? || self.column_win? || self.diagonal_win?
+      return true
+    end
     false
   end
 end
@@ -58,7 +96,7 @@ end
 def main
   board = Board.new
   player_number = 1
-  until board.winner?
+  until board.gameover?
     turn(board, player_number)
     player_number = player_number == 1 ? 2 : 1
   end
