@@ -16,9 +16,9 @@ class Game
   private
 
   def round
-    @board = Board.new
+    @board = Board.new(@players)
     loop do
-      @board.new_move(@players[@code_breaker])
+      @board.new_move
       break if @board.game_over?
     end
     puts "Round Over"
@@ -27,8 +27,6 @@ class Game
   def select_game_type
     add_human
     add_computer
-    @code_breaker = 0    #player roles
-    @code_maker = 1
   end
 
   def add_human
