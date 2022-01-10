@@ -1,19 +1,18 @@
+require_relative 'Mastermind'
 class Move
-  def initialize
-    loop do
-      move = get_input
-      if is_valid? move
-        @move = move
-        break
-      end
-    end
+  def initialize(player)
+    @move = get_move(player)
   end
 
   private
 
-  def get_input
-    print "Attack Player, enter new guess: "
-    gets.chomp
+  def get_move(player)
+    loop do
+      print "#{player.name}, enter new guess: "
+      move = player.get_move
+      return move if is_valid? move
+      puts "Invalid move, try again."
+    end
   end
 
   def is_valid?(move)

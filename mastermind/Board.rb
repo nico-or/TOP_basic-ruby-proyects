@@ -9,8 +9,8 @@ class Board
     puts "New Board"
   end
 
-  def new_move
-    @moves << Move.new
+  def new_move(player)
+    @moves << Move.new(player)
   end
 
   def game_over?

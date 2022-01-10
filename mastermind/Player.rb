@@ -6,6 +6,10 @@ class Player
     @score = 0
   end
 
+  def get_move
+    gets.chomp
+  end
+
   def to_s
     "#{@name}: #{@score} points"
   end
