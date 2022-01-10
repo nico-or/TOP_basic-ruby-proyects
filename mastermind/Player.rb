@@ -1,3 +1,4 @@
+require_relative 'UserInput'
 class Player
   attr_reader :name
 
@@ -8,6 +9,10 @@ class Player
 
   def get_move
     gets.chomp
+  end
+
+  def get_secret_code
+    get_move
   end
 
   def to_s
@@ -24,6 +29,10 @@ class Player
 end
 
 class Computer < Player
+
+  def get_secret_code
+    Mastermind::MOVES.shuffle.first(Mastermind::MOVES_LEN).join('')
+  end
 
   private
 
