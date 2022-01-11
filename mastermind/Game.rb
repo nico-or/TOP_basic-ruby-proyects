@@ -28,6 +28,8 @@ class Game
     end
     code_maker.update_score(board.score)
     puts "\nRound Over"
+    puts "Current Score"
+    show_scores
   end
 
   def set_game_type
@@ -88,6 +90,10 @@ class Game
   def game_over
     puts"\nGame Over"
     puts "\nFinal Score"
+    show_scores
+  end
+
+  def show_scores
     @players.each { |i| puts i }
   end
 end
