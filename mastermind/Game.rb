@@ -30,7 +30,7 @@ class Game
   end
 
   def add_human
-    @players << Player.new
+    @players << Human.new
   end
 
   def add_computer
