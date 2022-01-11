@@ -44,6 +44,14 @@ class Computer < Player
     Mastermind::MOVES.shuffle.first(Mastermind::MOVES_LEN).join('')
   end
 
+  def get_move
+    move = ""
+    Mastermind::MOVES_LEN.times do
+      move << Mastermind::MOVES.sample
+    end
+    move
+  end
+
   private
 
   def set_name
