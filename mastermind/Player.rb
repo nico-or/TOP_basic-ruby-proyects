@@ -2,7 +2,7 @@ class Player
   attr_reader :name, :score
 
   def initialize
-    @name = set_name || "Default"
+    @name = set_name
     @score = 0
   end
 
@@ -34,7 +34,8 @@ class Human < Player
 
   def set_name
     print "Enter player name: "
-    gets.chomp
+    name = gets.chomp
+    name == "" ? 'Default' : name
   end
 end
 
