@@ -1,4 +1,3 @@
-require_relative 'Mastermind'
 class Move
   def initialize(player)
     @move = get_move(player)

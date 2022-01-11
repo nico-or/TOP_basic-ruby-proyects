@@ -1,5 +1,3 @@
-require_relative 'Move'
-require_relative 'UserInput'
 class Board
   attr_reader :code_maker, :code_breaker
   def initialize(players)

@@ -1,6 +1,8 @@
-require_relative 'Player'
 require_relative 'Board'
-
+require_relative 'Player'
+require_relative 'Move'
+require_relative 'Mastermind'
+require_relative 'UserInput'
 class Game
   def initialize
     @players = []
