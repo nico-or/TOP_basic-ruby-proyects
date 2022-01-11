@@ -1,15 +1,19 @@
 class Board
-  attr_reader :code_maker, :code_breaker
+  attr_reader :secret_code, :code_maker, :code_breaker
   def initialize(players)
+    puts "New Board"
     @moves = []
-    @game_over = true
+    @game_over = false
     set_players_roles(players)
     set_secret_code(code_maker)
-    puts "New Board"
   end
 
   def new_move
-    @moves << Move.new(code_breaker)
+    move = Move.new(code_breaker)
+    move.set_feeback(secret_code)
+    @game_over = true if move.feedback == 'oooo'
+    @moves << move
+    show_moves
   end
 
   def game_over?
@@ -44,5 +48,18 @@ class Board
     input_getter.set_getter { player.get_secret_code }
     input_getter.set_validator { |i| Mastermind.is_valid_secret_code?(i) }
     @secret_code = input_getter.get_input
+    puts
+  end
+
+  def show_moves
+    puts " Round | Guess | Feedback "
+    @moves.each.with_index do |move, index|
+      arr = [
+        (index+1).to_s.rjust(5),
+        move.move.rjust(5),
+        move.feedback.ljust('feedback'.length)
+      ]
+      puts " #{arr.join(' | ')} "
+    end
   end
 end
