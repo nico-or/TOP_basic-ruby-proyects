@@ -1,22 +1,28 @@
 class Board
-  attr_reader :secret_code
+  attr_reader :moves, :secret_code
+
   def initialize(code_maker)
     puts "\nNew Board"
     @moves = []
-    @game_over = false
     set_secret_code(code_maker)
   end
 
   def new_move(code_breaker)
     move = Move.new(code_breaker)
     move.set_feeback(secret_code)
-    @game_over = true if move.feedback == 'oooo'
     @moves << move
     show_moves
   end
 
   def game_over?
-    @game_over
+    return true if moves.length == Mastermind::GUESS_COUNT
+    return true if moves.last.feedback == 'oooo'
+    false
+  end
+
+  def score
+    return 12 if moves.length == Mastermind::GUESS_COUNT
+    moves.length - 1
   end
 
   private

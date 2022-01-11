@@ -10,6 +10,10 @@ class Player
     "#{name}: #{score} points"
   end
 
+  def update_score(points)
+    @score += points
+  end
+
 end
 
 class Human < Player

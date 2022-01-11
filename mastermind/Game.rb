@@ -21,12 +21,12 @@ class Game
   private
 
   def round
-    @board = Board.new(code_maker)
+    board = Board.new(code_maker)
     loop do
-      @board.new_move(code_breaker)
-      break if @board.game_over?
+      board.new_move(code_breaker)
+      break if board.game_over?
     end
-
+    code_maker.update_score(board.score)
     puts "\nRound Over"
   end
 

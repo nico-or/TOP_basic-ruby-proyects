@@ -1,6 +1,7 @@
 module Mastermind
   MOVES = ('0'..'5').to_a
   MOVES_LEN = 4
+  GUESS_COUNT = 12
 
   def self.is_valid_secret_code? string
     string.chars.uniq.length == MOVES_LEN
