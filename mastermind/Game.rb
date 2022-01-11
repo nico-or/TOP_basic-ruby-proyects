@@ -14,7 +14,27 @@ class Game
   end
 
   def play
-    round
+    play_again = true
+    while play_again
+      round
+      reverse_players_roles
+      round
+
+      print "Play another round? (y/n): "
+      loop do
+        input = gets.chomp
+        case input
+        when 'y'
+          play_again = true
+          break
+        when 'n'
+          play_again = false
+          break
+        else
+          'Invalid. Try again. '
+        end
+      end
+    end
     game_over
   end
 
@@ -85,6 +105,10 @@ class Game
     end
     puts "\nCode Maker: #{code_maker.name}"
     puts "Code Breaker: #{code_breaker.name}"
+  end
+
+  def reverse_players_roles
+    @code_maker, @code_breaker = @code_breaker, @code_maker
   end
 
   def game_over
