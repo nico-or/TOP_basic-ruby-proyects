@@ -33,8 +33,8 @@ class Human < Player
   end
 
   def set_name
-    #print "Enter player name: "
-    #gets.chomp
+    print "Enter player name: "
+    gets.chomp
   end
 end
 

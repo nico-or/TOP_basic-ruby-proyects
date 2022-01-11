@@ -31,8 +31,22 @@ class Game
   end
 
   def set_game_type
-    add_human
-    add_computer
+    puts "\nSelect game type:" \
+    "\n1) Human vs Computer" \
+    "\n2) Human vs Human"
+
+    input_getter = UserInput::InputGetter.new
+    input_getter.set_getter { gets.chomp }
+    input_getter.set_validator { |i| %w{1 2}.include? i }
+
+    case input_getter.get_input
+    when '1'
+      add_human
+      add_computer
+    when '2'
+      add_human
+      add_human
+    end
   end
 
   def add_human
@@ -59,7 +73,7 @@ class Game
     input_getter.set_getter { gets.chomp }
     input_getter.set_validator { |i| %w{1 2}.include? i }
 
-    case '2'#input_getter.get_input
+    case input_getter.get_input
     when '1'
       @code_maker = players[0]
       @code_breaker = players[1]
