@@ -26,6 +26,8 @@ def legislator_by_zipcode(zipcode)
   end
 end
 
+template = File.open('form_letter.html','r').read
+
 until data.eof?
   row = data.readline
 
@@ -34,4 +36,10 @@ until data.eof?
   legislator_names = legislator_by_zipcode(zipcode)
 
   puts "#{attendee_name} #{zipcode} #{legislator_names}"
+
+  letter = template
+  letter = letter.gsub('FIRST_NAME',attendee_name)
+  letter = letter.gsub('LEGISLATORS',legislator_names)
+
+  puts letter
 end
