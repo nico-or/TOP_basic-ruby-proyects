@@ -26,16 +26,22 @@ def legislator_by_zipcode(zipcode)
   end
 end
 
+def save_thank_you_letter(id, letter)
+  Dir.mkdir('output') unless Dir.exist?('output')
+  File.open("output/thanks_#{id}.html",'w') { |i| i.write(letter) }
+end
+
 template_letter = File.read('form_letter.erb')
 erb_template = ERB.new template_letter
 
 until data.eof?
   row = data.readline
 
+  id = row[0]
   attendee_name = row[:first_name]
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislator_by_zipcode(zipcode)
 
   form_letter = erb_template.result(binding)
-  puts form_letter
+  save_thank_you_letter(id, form_letter)
 end
