@@ -1,6 +1,7 @@
 require 'csv'
 require 'open-uri'
 require 'json'
+require 'erb'
 
 GOOGLE_CIVIC_API_KEY = 'AIzaSyClRzDqDh5MsXwnCWi0kOiiBivP6JsSyBw'
 
@@ -19,27 +20,22 @@ def legislator_by_zipcode(zipcode)
 
   begin
     response = JSON.load(URI.open(url))
-    names = response['officials'].map { |i| i['name'] }
-    names.join(', ')
+    response['officials']
   rescue => exception
     'You can find your representatives by visiting www.commoncause.org/take-action/find-elected-officials'
   end
 end
 
-template = File.open('form_letter.html','r').read
+template_letter = File.read('form_letter.erb')
+erb_template = ERB.new template_letter
 
 until data.eof?
   row = data.readline
 
   attendee_name = row[:first_name]
   zipcode = clean_zipcode(row[:zipcode])
-  legislator_names = legislator_by_zipcode(zipcode)
+  legislators = legislator_by_zipcode(zipcode)
 
-  puts "#{attendee_name} #{zipcode} #{legislator_names}"
-
-  letter = template
-  letter = letter.gsub('FIRST_NAME',attendee_name)
-  letter = letter.gsub('LEGISLATORS',legislator_names)
-
-  puts letter
+  form_letter = erb_template.result(binding)
+  puts form_letter
 end
