@@ -48,6 +48,17 @@ class Game
   def play
     @board.show
   end
+
+  private
+
+  def get_input
+    print "\nEnter a new guess: "
+    while guess = gets.chomp
+      break(guess) if ('a'..'z').include? guess
+      print "Invalid. Try again: "
+    end
+  end
+
 end
 
 game = Game.new
