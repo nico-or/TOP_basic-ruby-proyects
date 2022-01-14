@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module GameMessages
   def msg_new_game
     print "Welcome to Hangman\n" \
