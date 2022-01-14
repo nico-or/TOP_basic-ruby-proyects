@@ -9,7 +9,7 @@ class Game
   end
 
   def play
-    loop do
+    until @board.is_over?
       @board.show
       @board.new_move(user_input)
     end
