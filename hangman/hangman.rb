@@ -43,8 +43,10 @@ end
 class Game
   attr_reader :dictionary, :secret_word
 
+  include GameMessages
+
   def initialize
-    puts "\nNew Game"
+    msg_new_game
     @board = Board.new('sample.txt')
   end
 
@@ -54,13 +56,13 @@ class Game
 
   private
 
-  def get_input
-    print "\nEnter a new guess: "
+  def user_input
+    msg_new_guess
     loop do
       guess = gets.chomp
       break(guess) if ('a'..'z').include? guess
 
-      print 'Invalid. Try again: '
+      msg_invalid_input
     end
   end
 end
