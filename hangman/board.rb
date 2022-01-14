@@ -1,10 +1,9 @@
 require_relative 'dictionary'
 require_relative 'serializable'
 class Board
+  attr_reader :save_file_name
 
   include Serializable
-
-  @@SAVEFILE = 'saved-game.json'
 
   def initialize(dictionary = '5desk.txt')
     @secret_word = Dictionary.new(dictionary).get_word.chars
@@ -13,6 +12,7 @@ class Board
     @fail_count = 0
     @correct_guesses = []
     @incorrect_guesses = []
+    @save_file_name = 'saved-game.json'
   end
 
   def show
@@ -33,7 +33,7 @@ class Board
     end
   end
 
-  def is_over?
+  def game_over?
     player_won? or player_lose?
   end
 
@@ -50,16 +50,11 @@ class Board
   end
 
   def save_game
-    #puts JSON.dump(to_json)
-    File.open(@@SAVEFILE, 'w') {|file| file.write(to_json) }
+    File.open(@save_file_name, 'w') { |file| file.write(to_json) }
   end
 
   def load_game
-    from_json(File.open(@@SAVEFILE, 'r').read)
-  end
-
-  def save_file_name
-    @@SAVEFILE
+    from_json(File.open(@save_file_name, 'r').read)
   end
 
   private

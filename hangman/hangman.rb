@@ -6,22 +6,14 @@ class Game
   def initialize
     msg_new_game
     @board = Board.new
-
-    if File.exists? @board.save_file_name
-      msg_old_saved_game
-      input = loop do
-        input = gets.chomp
-        break(input) if %w{y n}.include? input
-        msg_invalid_input
-      end
-      @board.load_game if input == 'y'
-    end
+    load_saved_game if File.exist? @board.save_file_name
   end
 
   def play
-    until @board.is_over?
+    until @board.game_over?
       @board.show
-      if 'save' == move = user_input
+      move = user_input
+      if move == 'save'
         msg_saving_game
         @board.save_game
         msg_game_saved
@@ -30,8 +22,10 @@ class Game
       @board.new_move(move)
     end
 
-    if @board.player_won? then msg_you_win
-    else msg_you_lose(@board.secret_word)
+    if @board.player_won?
+      msg_you_win
+    else
+      msg_you_lose(@board.secret_word)
     end
   end
 
@@ -46,6 +40,18 @@ class Game
 
       msg_invalid_input
     end
+  end
+
+  def load_saved_game
+    msg_old_saved_game
+    input = ''
+    loop do
+      input = gets.chomp
+      break if %w[y n].include? input
+
+      msg_invalid_input
+    end
+    @board.load_game if input == 'y'
   end
 end
 
