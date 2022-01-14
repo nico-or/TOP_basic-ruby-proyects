@@ -1,5 +1,11 @@
 require_relative 'dictionary'
+require_relative 'serializable'
 class Board
+
+  include Serializable
+
+  @@SAVEFILE = 'saved-game.json'
+
   def initialize(dictionary = '5desk.txt')
     @secret_word = Dictionary.new(dictionary).get_word.chars
     @user_word = Array.new(@secret_word.length, '_')
@@ -41,6 +47,11 @@ class Board
 
   def secret_word
     @secret_word.join
+  end
+
+  def save_game
+    #puts JSON.dump(to_json)
+    File.open(@@SAVEFILE, 'w') {|file| file.write(to_json) }
   end
 
   private

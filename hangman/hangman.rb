@@ -11,7 +11,13 @@ class Game
   def play
     until @board.is_over?
       @board.show
-      @board.new_move(user_input)
+      if 'save' == move = user_input
+        msg_saving_game
+        @board.save_game
+        msg_game_saved
+        return
+      end
+      @board.new_move(move)
     end
 
     if @board.player_won? then msg_you_win
@@ -23,9 +29,10 @@ class Game
 
   def user_input
     msg_new_guess
+    valid_input = ('a'..'z').to_a << 'save'
     loop do
       guess = gets.chomp
-      break(guess) if ('a'..'z').include? guess
+      break(guess) if valid_input.include? guess
 
       msg_invalid_input
     end
