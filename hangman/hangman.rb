@@ -19,7 +19,7 @@ end
 class Board
   def initialize(dictionary = '5desk.txt')
     @secret_word = Dictionary.new(dictionary).get_word
-    @user_word = Array.new(@secret_word.length,'_')
+    @user_word = Array.new(@secret_word.length, '_')
     @max_fails = 5
     @fail_count = 0
   end
@@ -30,13 +30,16 @@ class Board
   end
 
   private
+
   def user_attemps
     'Fail Count: ' + 'x' * @fail_count + 'o' * (@max_fails - @fail_count)
   end
+
   def user_word
     'Progress: ' + @user_word.join(' ')
   end
 end
+
 class Game
   attr_reader :dictionary, :secret_word
 
@@ -53,12 +56,13 @@ class Game
 
   def get_input
     print "\nEnter a new guess: "
-    while guess = gets.chomp
+    loop do
+      guess = gets.chomp
       break(guess) if ('a'..'z').include? guess
-      print "Invalid. Try again: "
+
+      print 'Invalid. Try again: '
     end
   end
-
 end
 
 game = Game.new
