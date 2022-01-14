@@ -29,4 +29,8 @@ module GameMessages
   def msg_game_saved
     puts "Done"
   end
+
+  def msg_old_saved_game
+    print "There's a previous game saved\nLoad previous game? (y/n) "
+  end
 end

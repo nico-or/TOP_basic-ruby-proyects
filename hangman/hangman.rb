@@ -5,7 +5,17 @@ class Game
 
   def initialize
     msg_new_game
-    @board = Board.new('sample.txt')
+    @board = Board.new
+
+    if File.exists? @board.save_file_name
+      msg_old_saved_game
+      input = loop do
+        input = gets.chomp
+        break(input) if %w{y n}.include? input
+        msg_invalid_input
+      end
+      @board.load_game if input == 'y'
+    end
   end
 
   def play

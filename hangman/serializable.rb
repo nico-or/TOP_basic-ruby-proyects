@@ -7,3 +7,11 @@ module Serializable
     end
     JSON.dump(hash)
   end
+
+  def from_json(json_string)
+    hash = JSON.parse(json_string)
+    hash.each_pair do |key, value|
+      instance_variable_set(key.to_sym, value)
+    end
+  end
+end

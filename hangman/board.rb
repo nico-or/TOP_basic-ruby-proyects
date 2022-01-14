@@ -54,6 +54,14 @@ class Board
     File.open(@@SAVEFILE, 'w') {|file| file.write(to_json) }
   end
 
+  def load_game
+    from_json(File.open(@@SAVEFILE, 'r').read)
+  end
+
+  def save_file_name
+    @@SAVEFILE
+  end
+
   private
 
   def user_attemps
