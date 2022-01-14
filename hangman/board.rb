@@ -27,18 +27,6 @@ class Board
     end
   end
 
-  def is_over?
-    player_won? or player_lose?
-  end
-
-  def player_won?
-    @user_word.none? '_'
-  end
-
-  def player_lose?
-    @fail_count == @max_fails
-  end
-
   private
 
   def user_attemps
