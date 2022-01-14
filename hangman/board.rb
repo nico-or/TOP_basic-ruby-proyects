@@ -39,6 +39,10 @@ class Board
     @fail_count == @max_fails
   end
 
+  def secret_word
+    @secret_word.join
+  end
+
   private
 
   def user_attemps

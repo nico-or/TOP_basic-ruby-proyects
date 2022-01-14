@@ -11,4 +11,13 @@ module GameMessages
   def msg_invalid_input
     print 'Invalid. Try again: '
   end
+
+  def msg_you_win
+    puts "\nYou Win!"
+  end
+
+  def msg_you_lose(secret_word)
+    puts "\nYou Lose\n"\
+    "The secret word was: #{secret_word}"
+  end
 end

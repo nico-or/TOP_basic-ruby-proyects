@@ -13,6 +13,10 @@ class Game
       @board.show
       @board.new_move(user_input)
     end
+
+    if @board.player_won? then msg_you_win
+    else msg_you_lose(@board.secret_word)
+    end
   end
 
   private
