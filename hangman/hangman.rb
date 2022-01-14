@@ -9,7 +9,10 @@ class Game
   end
 
   def play
-    @board.show
+    loop do
+      @board.show
+      @board.new_move(user_input)
+    end
   end
 
   private
