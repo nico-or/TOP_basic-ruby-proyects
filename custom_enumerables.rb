@@ -47,10 +47,10 @@ module Enumerable
   end
 end
 
-blank_proc = proc { }
+blank_proc = proc {}
 
 # my_each test
-puts "Testing my_each"
+puts 'Testing my_each'
 array = (0..4).to_a
 print_block = proc { |i| print "#{i} " }
 p array.my_each(&print_block)
@@ -58,7 +58,7 @@ p array.each(&print_block)
 puts array.my_each(&blank_proc) == array.each(&blank_proc)
 
 # my_each_with_index test
-puts "Testing my_each_with_index"
+puts 'Testing my_each_with_index'
 array = ('a'..'e').to_a
 print_with_index_block = proc { |val, idx| puts "index: #{idx} value: #{val}" }
 p array.my_each_with_index(&print_with_index_block)
@@ -66,39 +66,39 @@ p array.each_with_index(&print_with_index_block)
 puts array.my_each_with_index(&blank_proc) == array.each_with_index(&blank_proc)
 
 # my_select test
-puts "Testing my_select"
+puts 'Testing my_select'
 array = (0..5).to_a
-test_proc = proc { |i| i.even?}
+test_proc = proc { |i| i.even? }
 p array.my_select(&test_proc)
 p array.select(&test_proc)
 p array.my_select(&test_proc) == array.select(&test_proc)
 
 # my_all? test
-puts "Testing my_all?"
+puts 'Testing my_all?'
 array = (0..5).to_a
-test_proc = proc { |i| i.even?}
+test_proc = proc { |i| i.even? }
 p array.my_all?(&test_proc) == array.all?(&test_proc)
 
 array = [0, 2, 4]
-test_proc = proc { |i| i.even?}
+test_proc = proc { |i| i.even? }
 p array.my_all?(&test_proc) == array.all?(&test_proc)
 
 # my_any? test
-puts "Testing my_any?"
+puts 'Testing my_any?'
 array = (0..5).to_a
-test_proc = proc { |i| i.odd?}
+test_proc = proc { |i| i.odd? }
 p array.my_any?(&test_proc) == array.any?(&test_proc)
 
 array = [0, 2, 4]
-test_proc = proc { |i| i.odd?}
+test_proc = proc { |i| i.odd? }
 p array.my_any?(&test_proc) == array.any?(&test_proc)
 
 # my_none? test
-puts "Testing my_none?"
+puts 'Testing my_none?'
 array = (0..5).to_a
-test_proc = proc { |i| i.odd?}
+test_proc = proc { |i| i.odd? }
 p array.my_none?(&test_proc) == array.none?(&test_proc)
 
 array = [0, 2, 4]
-test_proc = proc { |i| i.odd?}
+test_proc = proc { |i| i.odd? }
 p array.my_none?(&test_proc) == array.none?(&test_proc)
