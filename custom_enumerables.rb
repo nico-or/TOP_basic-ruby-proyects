@@ -16,6 +16,14 @@ module Enumerable
     end
     self
   end
+
+  def my_select
+    arr = []
+    each do |var|
+      arr << var if yield var
+    end
+    arr
+  end
 end
 
 blank_proc = proc { }
@@ -35,3 +43,11 @@ print_with_index_block = proc { |val, idx| puts "index: #{idx} value: #{val}" }
 p array.my_each_with_index(&print_with_index_block)
 p array.each_with_index(&print_with_index_block)
 puts array.my_each_with_index(&blank_proc) == array.each_with_index(&blank_proc)
+
+# my_select test
+puts "Testing my_select"
+array = (0..5).to_a
+test_proc = proc { |i| i.even?}
+p array.my_select(&test_proc)
+p array.select(&test_proc)
+p array.my_select(&test_proc) == array.select(&test_proc)
