@@ -38,6 +38,13 @@ module Enumerable
     end
     false
   end
+
+  def my_none?
+    each do |var|
+      return false if yield var
+    end
+    true
+  end
 end
 
 blank_proc = proc { }
@@ -85,3 +92,13 @@ p array.my_any?(&test_proc) == array.any?(&test_proc)
 array = [0, 2, 4]
 test_proc = proc { |i| i.odd?}
 p array.my_any?(&test_proc) == array.any?(&test_proc)
+
+# my_none? test
+puts "Testing my_none?"
+array = (0..5).to_a
+test_proc = proc { |i| i.odd?}
+p array.my_none?(&test_proc) == array.none?(&test_proc)
+
+array = [0, 2, 4]
+test_proc = proc { |i| i.odd?}
+p array.my_none?(&test_proc) == array.none?(&test_proc)
