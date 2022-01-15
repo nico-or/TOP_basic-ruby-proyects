@@ -24,6 +24,13 @@ module Enumerable
     end
     arr
   end
+
+  def my_all?
+    each do |var|
+      return false unless yield var
+    end
+    true
+  end
 end
 
 blank_proc = proc { }
@@ -51,3 +58,13 @@ test_proc = proc { |i| i.even?}
 p array.my_select(&test_proc)
 p array.select(&test_proc)
 p array.my_select(&test_proc) == array.select(&test_proc)
+
+# my_all? test
+puts "Testing my_all?"
+array = (0..5).to_a
+test_proc = proc { |i| i.even?}
+p array.my_all?(&test_proc) == array.all?(&test_proc)
+
+array = [0, 2, 4]
+test_proc = proc { |i| i.even?}
+p array.my_all?(&test_proc) == array.all?(&test_proc)
