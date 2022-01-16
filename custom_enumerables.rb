@@ -55,6 +55,14 @@ module Enumerable
     end
     count
   end
+
+  def my_map(&block)
+    arr = []
+    self.each do |i|
+      arr << yield(i)
+    end
+    arr
+  end
 end
 
 blank_proc = proc {}
@@ -120,3 +128,9 @@ p array.my_count == array.count
 p array.my_count('a') == array.count('a')
 p array.my_count('d') == array.count('d')
 p array.my_count(1) == array.count(1)
+
+# my_map test
+puts 'Testing my_map'
+array = (0..5).to_a
+test_proc = proc { |i| i**2 }
+p array.my_map(&test_proc) == array.map(&test_proc)
