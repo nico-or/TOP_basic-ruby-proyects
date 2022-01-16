@@ -163,3 +163,15 @@ def multiply_els(arr)
   arr.my_inject {|prod, i| prod * i }
 end
 p multiply_els([2, 4, 5]) == 40
+
+
+# new my_map test
+# Modify #my_map to take either a proc or a block.
+# It won’t be necessary to apply both a proc and a block in the same #my_map call since you could get the same effect by chaining together one #my_map call with the block and one with the proc.
+# This approach is also clearer, since the user doesn’t have to remember whether the proc or block will be run first.
+# So if both a proc and a block are given, only execute the proc.
+
+puts 'Testing my_map'
+array = (0..5).to_a
+test_proc = proc { |i| i**2 }
+p array.my_map(&test_proc) == array.map { |i| i**2 }
