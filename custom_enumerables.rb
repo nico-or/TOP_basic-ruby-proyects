@@ -63,6 +63,19 @@ module Enumerable
     end
     arr
   end
+
+  def my_inject(start=nil, &block)
+    bar = self.to_a
+    unless start
+      foo = bar.shift
+    else
+      foo = start
+    end
+    bar.each do |i|
+      foo = yield(foo, i)
+    end
+    foo
+  end
 end
 
 blank_proc = proc {}
@@ -134,3 +147,19 @@ puts 'Testing my_map'
 array = (0..5).to_a
 test_proc = proc { |i| i**2 }
 p array.my_map(&test_proc) == array.map(&test_proc)
+
+# my_inject test
+puts 'Testing my_inject'
+#p (5..10).my_inject(:+) == 45
+p (5..10).my_inject { |sum, n| sum + n } == 45
+#p (5..10).my_inject(1, :*) == 151200
+p (5..10).my_inject(1) { |product, n| product * n } == 151200
+longest = %w{ cat sheep bear }.my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p longest == 'sheep'
+
+def multiply_els(arr)
+  arr.my_inject {|prod, i| prod * i }
+end
+p multiply_els([2, 4, 5]) == 40
