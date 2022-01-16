@@ -45,6 +45,16 @@ module Enumerable
     end
     true
   end
+
+  def my_count(val = nil)
+    return length unless val
+
+    count = 0
+    self.each do |i|
+      count += 1 if i == val
+    end
+    count
+  end
 end
 
 blank_proc = proc {}
@@ -102,3 +112,11 @@ p array.my_none?(&test_proc) == array.none?(&test_proc)
 array = [0, 2, 4]
 test_proc = proc { |i| i.odd? }
 p array.my_none?(&test_proc) == array.none?(&test_proc)
+
+# my_count test
+puts 'Testing my_count'
+array = %w[a a b c d]
+p array.my_count == array.count
+p array.my_count('a') == array.count('a')
+p array.my_count('d') == array.count('d')
+p array.my_count(1) == array.count(1)
