@@ -14,6 +14,23 @@ class LinkedList
       @head = new_node
     end
   end
+
+  def to_s
+    return unless head
+
+    values.map { |i| "( #{i} )" }.join(' -> ') << ' -> nil'
+  end
+
+  def values
+    values = []
+    current = head
+    loop do
+      values << current.value
+      current = current.next
+      break unless current
+    end
+    values
+  end
 end
 
 class Node
