@@ -6,6 +6,7 @@ def fibs(n)
     else
       out << out[i-1] + out[i-2]
     end
+  end
   out
 end
 
