@@ -54,14 +54,18 @@ class Node
   end
 end
 
+puts "\nTesting #append"
 list = LinkedList.new
 list.append(1)
 list.append(2)
 list.append('foo')
-list.prepend('prepend')
-p list
 puts list
 
-list_2 = LinkedList.new
-list_2.prepend('prepend_empty_list')
-puts list_2
+puts "\nTesting #prepend"
+list.prepend('prepend')
+puts list
+
+puts "\nTesting #prepend on emtpy list"
+list = LinkedList.new
+list.prepend('prepend_empty_list')
+puts list
