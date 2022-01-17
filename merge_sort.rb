@@ -4,14 +4,10 @@ def merge(a, b)
     foo = a.first < b.first ? a.shift : b.shift
     out << foo
   end
-
-  if a.empty?
-    b.each { |i| out << i }
-  else
-    a.each { |i| out << i }
-  end
-
-  out
+  # Both a and b came in already sorted, so after
+  # ones runs out the other one can be safely concatenated.
+  # Also, adding and empty array has no effect.
+  out + a + b
 end
 
 puts "Testing merge(a, b)"
