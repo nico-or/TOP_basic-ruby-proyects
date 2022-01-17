@@ -3,6 +3,17 @@ class LinkedList
   def initialize
     @head = nil
   end
+
+  def append(value)
+    new_node = Node.new(value)
+    if head
+      current = head
+      current = current.next while current.next
+      current.next = new_node
+    else
+      @head = new_node
+    end
+  end
 end
 
 class Node
@@ -15,5 +26,8 @@ class Node
 end
 
 list = LinkedList.new
+list.append(1)
+list.append(2)
+list.append('foo')
 p list
 puts list
