@@ -62,6 +62,10 @@ class Node
     @value = value
     @next = nil
   end
+
+  def to_s
+    "Node @value = #{value}"
+  end
 end
 
 puts "\nTesting #append"
