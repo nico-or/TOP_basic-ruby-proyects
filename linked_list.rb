@@ -55,6 +55,17 @@ class LinkedList
     end
   end
 
+  def pop
+    previous = nil
+    current = head
+    while current.next
+      previous = current
+      current = current.next
+    end
+    previous.next = nil
+    current
+  end
+
   def to_s
     return if empty?
 
@@ -152,3 +163,12 @@ puts "Node at 0: #{list.at(0)}"
 puts "Node at 2: #{list.at(2)}"
 puts "Node at -1: #{list.at(-1)}"
 puts "Node at 100: #{list.at(100)}"
+
+puts "\nTesting #pop"
+list = LinkedList.new
+n = 5
+n.times { |i| list.append(i) }
+puts "list: #{list}"
+puts "#pop: #{list.pop}"
+puts "#pop: #{list.pop}"
+puts "list: #{list}"
