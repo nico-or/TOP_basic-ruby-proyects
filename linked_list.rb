@@ -77,6 +77,19 @@ class LinkedList
     false
   end
 
+  def find(value)
+    return nil unless contains? value
+
+    current_node = head
+    index = 0
+    while current_node
+      return index if current_node.value == value
+
+      current_node = current_node.next
+      index += 1
+    end
+  end
+
   def to_s
     return if empty?
 
@@ -190,3 +203,12 @@ n.times { |i| list.append(i) }
 puts "List: #{list}"
 puts "list.contains? 2: #{list.contains?(2)}"
 puts "list.contains? 'foo': #{list.contains?('foo')}"
+
+puts "\nTesting #find"
+list = LinkedList.new
+n = 5
+n.times { |i| list.append(i) }
+puts "List: #{list}"
+puts "list.find 0: #{list.find(0)}"
+puts "list.find 3: #{list.find(3)}"
+puts "list.find 'foo': #{list.find('foo')}"
