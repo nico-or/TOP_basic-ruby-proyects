@@ -99,6 +99,18 @@ class LinkedList
     self
   end
 
+  def delete_at(index)
+    return self unless valid_index? index
+
+    if index == 0
+      @head = head.next
+    else
+      at(index-1).next = at(index).next
+    end
+    @size -= 1
+    self
+  end
+
   def to_s
     return if empty?
 
@@ -236,3 +248,14 @@ puts "list.insert_at('foo',0)             NewList = #{list.insert_at('foo',0)}"
 puts "list.insert_at('bar', list.size-1)  NewList = #{list.insert_at('bar', list.size-1)}"
 puts "list.insert_at('baz',10)            NewList = #{list.insert_at('baz',10)}"
 puts "list.insert_at('baz',-1)            NewList = #{list.insert_at('baz',-1)}"
+
+puts "\nTesting #delete_at"
+list = LinkedList.new
+n = 10
+n.times { |i| list.append(i) }
+puts "List: #{list}"
+puts "list.delete_at(3)            NewList = #{list.delete_at(3)}"
+puts "list.delete_at(0)            NewList = #{list.delete_at(0)}"
+puts "list.delete_at(list.size-1)  NewList = #{list.delete_at(list.size-1)}"
+puts "list.delete_at(10)           NewList = #{list.delete_at(10)}"
+puts "list.delete_at(-1)           NewList = #{list.delete_at(-1)}"
