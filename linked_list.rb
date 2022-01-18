@@ -7,22 +7,22 @@ class LinkedList
 
   def append(value)
     new_node = Node.new(value)
-    if head
+    if empty?
+      @head = new_node
+    else
       current = head
       current = current.next while current.next
       current.next = new_node
-    else
-      @head = new_node
     end
   end
 
   def prepend(value)
-    if head
+    if empty?
+      append(value)
+    else
       new_node = Node.new(value)
       new_node.next = head
       @head = new_node
-    else
-      append(value)
     end
   end
 
@@ -37,7 +37,7 @@ class LinkedList
   end
 
   def to_s
-    return unless head
+    return if empty?
 
     values.map { |i| "( #{i} )" }.join(' -> ') << ' -> nil'
   end
@@ -51,6 +51,10 @@ class LinkedList
       break unless current
     end
     values
+  end
+
+  def empty?
+    head == nil
   end
 end
 
