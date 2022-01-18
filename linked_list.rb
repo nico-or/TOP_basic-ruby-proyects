@@ -67,6 +67,16 @@ class LinkedList
     output
   end
 
+  def contains?(value)
+    current_node = head
+    while current_node
+      return true if current_node.value == value
+
+      current_node = current_node.next
+    end
+    false
+  end
+
   def to_s
     return if empty?
 
@@ -172,3 +182,11 @@ n.times { |i| list.append(i) }
 puts "initial list: #{list}"
 (n+1).times { puts "#pop: #{list.pop}, new list = #{list}" }
 puts "final list: #{list}"
+
+puts "\nTesting #contains?"
+list = LinkedList.new
+n = 5
+n.times { |i| list.append(i) }
+puts "List: #{list}"
+puts "list.contains? 2: #{list.contains?(2)}"
+puts "list.contains? 'foo': #{list.contains?('foo')}"
