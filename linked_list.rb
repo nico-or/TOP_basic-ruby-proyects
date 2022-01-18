@@ -85,6 +85,20 @@ class LinkedList
     end
   end
 
+  def insert_at(value, index)
+    return self unless valid_index? index
+
+    if index == 0
+      prepend value
+    else
+      new_node = Node.new(value)
+      new_node.next = at(index)
+      at(index-1).next = new_node
+    end
+    @size += 1
+    self
+  end
+
   def to_s
     return if empty?
 
@@ -211,3 +225,14 @@ puts "List: #{list}"
 puts "list.find 0: #{list.find(0)}"
 puts "list.find 3: #{list.find(3)}"
 puts "list.find 'foo': #{list.find('foo')}"
+
+puts "\nTesting #insert_at"
+list = LinkedList.new
+n = 5
+n.times { |i| list.append(i) }
+puts "List: #{list}"
+puts "list.insert_at(17,3)                NewList = #{list.insert_at(17,3)}"
+puts "list.insert_at('foo',0)             NewList = #{list.insert_at('foo',0)}"
+puts "list.insert_at('bar', list.size-1)  NewList = #{list.insert_at('bar', list.size-1)}"
+puts "list.insert_at('baz',10)            NewList = #{list.insert_at('baz',10)}"
+puts "list.insert_at('baz',-1)            NewList = #{list.insert_at('baz',-1)}"
