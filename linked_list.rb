@@ -26,6 +26,16 @@ class LinkedList
     end
   end
 
+  def size
+    count = 0
+    current = head
+    while current
+      count += 1
+      current = current.next
+    end
+    count
+  end
+
   def to_s
     return unless head
 
@@ -69,3 +79,15 @@ puts "\nTesting #prepend on emtpy list"
 list = LinkedList.new
 list.prepend('prepend_empty_list')
 puts list
+
+puts "\nTesting #size"
+list = LinkedList.new
+n = 5
+n.times { |i| list.append(i) }
+puts list
+puts list.size == n
+
+puts "\nTesting #size on empty list"
+list = LinkedList.new
+puts list
+puts list.size == 0
