@@ -1,8 +1,9 @@
 class LinkedList
-  attr_reader :head
+  attr_reader :head, :size
 
   def initialize
     @head = nil
+    @size = 0
   end
 
   def append(value)
@@ -14,6 +15,7 @@ class LinkedList
       current = current.next while current.next
       current.next = new_node
     end
+    @size += 1
   end
 
   def prepend(value)
@@ -24,16 +26,7 @@ class LinkedList
       new_node.next = head
       @head = new_node
     end
-  end
-
-  def size
-    count = 0
-    current = head
-    while current
-      count += 1
-      current = current.next
-    end
-    count
+    @size += 1
   end
 
   def tail
@@ -45,14 +38,21 @@ class LinkedList
     current
   end
 
-  def at(target_index)
+  def at(index)
+    begin
+      raise 'Invalid index value' if index > size || index < 0
+    rescue StandardError => e
+      puts e.message
+      return
+    end
+
     current_index = 0
     current_node = head
-    while current_node
-      return current_node if current_index == target_index
-      current_index += 1
+    until current_index == index
       current_node = current_node.next
+      current_index += 1
     end
+    current_node
   end
 
   def pop
