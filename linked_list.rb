@@ -51,12 +51,12 @@ class LinkedList
   end
 
   def pop
-    output = self.tail
+    output = tail
     if size <= 1
       @head = nil
       @size = 0
     else
-      at(size-2).next = nil
+      at(size - 2).next = nil
       @size -= 1
     end
     output
@@ -88,12 +88,12 @@ class LinkedList
   def insert_at(value, index)
     return self unless valid_index? index
 
-    if index == 0
+    if index.zero?
       prepend value
     else
       new_node = Node.new(value)
       new_node.next = at(index)
-      at(index-1).next = new_node
+      at(index - 1).next = new_node
     end
     @size += 1
     self
@@ -102,10 +102,10 @@ class LinkedList
   def delete_at(index)
     return self unless valid_index? index
 
-    if index == 0
+    if index.zero?
       @head = head.next
     else
-      at(index-1).next = at(index).next
+      at(index - 1).next = at(index).next
     end
     @size -= 1
     self
@@ -129,7 +129,7 @@ class LinkedList
   end
 
   def empty?
-    head == nil
+    head.nil?
   end
 
   def valid_index?(index)
@@ -177,7 +177,7 @@ puts list.size == n
 puts "\nTesting #size on empty list"
 list = LinkedList.new
 puts list
-puts list.size == 0
+puts list.size.zero?
 
 puts "\nTesting #head"
 list = LinkedList.new
@@ -218,7 +218,7 @@ list = LinkedList.new
 n = 5
 n.times { |i| list.append(i) }
 puts "initial list: #{list}"
-(n+1).times { puts "#pop: #{list.pop}, new list = #{list}" }
+(n + 1).times { puts "#pop: #{list.pop}, new list = #{list}" }
 puts "final list: #{list}"
 
 puts "\nTesting #contains?"
@@ -243,11 +243,11 @@ list = LinkedList.new
 n = 5
 n.times { |i| list.append(i) }
 puts "List: #{list}"
-puts "list.insert_at(17,3)                NewList = #{list.insert_at(17,3)}"
-puts "list.insert_at('foo',0)             NewList = #{list.insert_at('foo',0)}"
-puts "list.insert_at('bar', list.size-1)  NewList = #{list.insert_at('bar', list.size-1)}"
-puts "list.insert_at('baz',10)            NewList = #{list.insert_at('baz',10)}"
-puts "list.insert_at('baz',-1)            NewList = #{list.insert_at('baz',-1)}"
+puts "list.insert_at(17,3)                NewList = #{list.insert_at(17, 3)}"
+puts "list.insert_at('foo',0)             NewList = #{list.insert_at('foo', 0)}"
+puts "list.insert_at('bar', list.size-1)  NewList = #{list.insert_at('bar', list.size - 1)}"
+puts "list.insert_at('baz',10)            NewList = #{list.insert_at('baz', 10)}"
+puts "list.insert_at('baz',-1)            NewList = #{list.insert_at('baz', -1)}"
 
 puts "\nTesting #delete_at"
 list = LinkedList.new
@@ -256,6 +256,6 @@ n.times { |i| list.append(i) }
 puts "List: #{list}"
 puts "list.delete_at(3)            NewList = #{list.delete_at(3)}"
 puts "list.delete_at(0)            NewList = #{list.delete_at(0)}"
-puts "list.delete_at(list.size-1)  NewList = #{list.delete_at(list.size-1)}"
+puts "list.delete_at(list.size-1)  NewList = #{list.delete_at(list.size - 1)}"
 puts "list.delete_at(10)           NewList = #{list.delete_at(10)}"
 puts "list.delete_at(-1)           NewList = #{list.delete_at(-1)}"
