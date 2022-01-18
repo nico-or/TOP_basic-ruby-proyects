@@ -39,12 +39,7 @@ class LinkedList
   end
 
   def at(index)
-    begin
-      raise 'Invalid index value' if index > size || index < 0
-    rescue StandardError => e
-      puts e.message
-      return
-    end
+    return unless valid_index? index
 
     current_index = 0
     current_node = head
@@ -109,6 +104,10 @@ class LinkedList
 
   def empty?
     head == nil
+  end
+
+  def valid_index?(index)
+    index < size && index >= 0
   end
 end
 
