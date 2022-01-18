@@ -45,6 +45,16 @@ class LinkedList
     current
   end
 
+  def at(target_index)
+    current_index = 0
+    current_node = head
+    while current_node
+      return current_node if current_index == target_index
+      current_index += 1
+      current_node = current_node.next
+    end
+  end
+
   def to_s
     return if empty?
 
@@ -132,3 +142,13 @@ puts "\nTesting #tail on empty list "
 list = LinkedList.new
 puts "List: #{list}"
 puts "List tail: #{list.tail}"
+
+puts "\nTesting #index"
+list = LinkedList.new
+n = 5
+n.times { |i| list.append(i) }
+puts list
+puts "Node at 0: #{list.at(0)}"
+puts "Node at 2: #{list.at(2)}"
+puts "Node at -1: #{list.at(-1)}"
+puts "Node at 100: #{list.at(100)}"
