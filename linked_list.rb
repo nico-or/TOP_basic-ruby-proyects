@@ -36,6 +36,15 @@ class LinkedList
     count
   end
 
+  def tail
+    return if empty?
+
+    current = head
+    current = current.next while current.next
+
+    current
+  end
+
   def to_s
     return if empty?
 
@@ -111,3 +120,15 @@ puts "\nTesting #head on empty list "
 list = LinkedList.new
 puts "List: #{list}"
 puts "List head: #{list.head}"
+
+puts "\nTesting #tail"
+list = LinkedList.new
+list.append('#head')
+list.append('#tail')
+puts "List: #{list}"
+puts "List tail: #{list.tail}"
+
+puts "\nTesting #tail on empty list "
+list = LinkedList.new
+puts "List: #{list}"
+puts "List tail: #{list.tail}"
