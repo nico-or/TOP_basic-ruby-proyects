@@ -56,14 +56,15 @@ class LinkedList
   end
 
   def pop
-    previous = nil
-    current = head
-    while current.next
-      previous = current
-      current = current.next
+    output = self.tail
+    if size <= 1
+      @head = nil
+      @size = 0
+    else
+      at(size-2).next = nil
+      @size -= 1
     end
-    previous.next = nil
-    current
+    output
   end
 
   def to_s
@@ -168,7 +169,6 @@ puts "\nTesting #pop"
 list = LinkedList.new
 n = 5
 n.times { |i| list.append(i) }
-puts "list: #{list}"
-puts "#pop: #{list.pop}"
-puts "#pop: #{list.pop}"
-puts "list: #{list}"
+puts "initial list: #{list}"
+(n+1).times { puts "#pop: #{list.pop}, new list = #{list}" }
+puts "final list: #{list}"
