@@ -95,3 +95,15 @@ puts "\nTesting #size on empty list"
 list = LinkedList.new
 puts list
 puts list.size == 0
+
+puts "\nTesting #head"
+list = LinkedList.new
+list.append('head')
+list.append('neck?')
+puts "List: #{list}"
+puts "List head: #{list.head}"
+
+puts "\nTesting #head on empty list "
+list = LinkedList.new
+puts "List: #{list}"
+puts "List head: #{list.head}"
