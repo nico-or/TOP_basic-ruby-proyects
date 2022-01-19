@@ -98,6 +98,51 @@ class Tree
       node.right ? insert_rec(value, node.right) : node.right = Node.new(value)
     end
   end
+
+  def delete(value)
+    return unless find(value)
+
+    if @root.data == value
+      new_node = @root.successor
+      delete(new_node.data)
+      new_node.right = @root.right
+      new_node.left = @root.left
+      @root = new_node
+      return
+    end
+
+    delete_rec(value)
+  end
+
+  def delete_rec(value, node = @root)
+    return unless node
+
+    if node.left && node.left.data == value
+      node.left = remove_node(node.left)
+    elsif node.right && node.right.data == value
+      node.right = remove_node(node.right)
+
+    elsif node.left && value < node.data
+      delete_rec(value, node.left)
+    elsif node.right && value > node.data
+      delete_rec(value, node.right)
+    end
+  end
+
+  def remove_node(node)
+    case node.child_count
+    when 0
+      nil
+    when 1
+      node.left || node.right
+    when 2
+      new_node = node.successor
+      delete_rec(new_node.data, node)
+      new_node.right = node.right
+      new_node.left = node.left
+      new_node
+    end
+  end
 end
 
 tree = Tree.new((0..5).to_a)
