@@ -48,6 +48,16 @@ class Tree
     right = node.right ? find(value, node.right) : nil
     return left || right
   end
+
+  def insert(value, node=@root)
+    return if find(value)
+
+    if value < node.data
+      node.left ? insert(value, node.left) : node.left = Node.new(value)
+    else
+      node.right ? insert(value, node.right) : node.right = Node.new(value)
+    end
+  end
 end
 
 tree = Tree.new((0..5).to_a)
