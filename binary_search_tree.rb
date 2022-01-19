@@ -12,6 +12,44 @@ class Node
   def <=>(other)
     data <=> other.data
   end
+
+  def childrens
+    [left, right]
+  end
+
+  def child_count
+    childrens.compact.size
+  end
+
+  def successor
+    left_successor || right_successor
+  end
+
+  # find biggest left descendant node
+  def left_successor
+    return unless left
+
+    current = left
+    value = current.data
+    while current.right
+      value = current.data if current.data > value
+      current = current.right
+    end
+    current
+  end
+
+  # find smallest right descendant node
+  def right_successor
+    return unless right
+
+    current = right
+    value = current.data
+    while current.left
+      value = current.data if current.data < value
+      current = current.left
+    end
+    current
+  end
 end
 
 class Tree
