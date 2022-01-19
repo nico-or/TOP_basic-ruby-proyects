@@ -49,13 +49,16 @@ class Tree
     return left || right
   end
 
-  def insert(value, node=@root)
+  def insert(value)
     return if find(value)
+    insert_rec(value)
+  end
 
+  def insert_rec(value, node=@root)
     if value < node.data
-      node.left ? insert(value, node.left) : node.left = Node.new(value)
+      node.left ? insert_rec(value, node.left) : node.left = Node.new(value)
     else
-      node.right ? insert(value, node.right) : node.right = Node.new(value)
+      node.right ? insert_rec(value, node.right) : node.right = Node.new(value)
     end
   end
 end
