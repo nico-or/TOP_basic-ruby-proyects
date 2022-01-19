@@ -39,8 +39,16 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
-end
 
+  def find(value, node=@root)
+    node = node
+    return node if node.data.eql? value
+
+    left = node.left ? find(value, node.left) : nil
+    right = node.right ? find(value, node.right) : nil
+    return left || right
+  end
+end
 
 tree = Tree.new((0..5).to_a)
 tree.pretty_print
