@@ -25,13 +25,12 @@ class Tree
     return if array.empty?
 
     array = array.uniq.sort
-    center = array.length/2
+    center = array.length / 2
 
     root = Node.new(array[center])
     root.left = build_tree(array[0...center])
-    root.right = build_tree(array[center+1..])
-
-    return root
+    root.right = build_tree(array[center + 1..])
+    root
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -40,21 +39,21 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def find(value, node=@root)
-    node = node
-    return node if node.data.eql? value
+  def find(value, node = @root)
+    return node if node.data == value
 
     left = node.left ? find(value, node.left) : nil
     right = node.right ? find(value, node.right) : nil
-    return left || right
+    left || right
   end
 
   def insert(value)
     return if find(value)
+
     insert_rec(value)
   end
 
-  def insert_rec(value, node=@root)
+  def insert_rec(value, node = @root)
     if value < node.data
       node.left ? insert_rec(value, node.left) : node.left = Node.new(value)
     else
