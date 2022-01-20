@@ -208,6 +208,14 @@ class Tree
     nodes += [node]
     nodes
   end
+
+  def height(node)
+    return -1 unless node
+
+    1 + node.childrens.map do |child|
+      height(child)
+    end.max
+  end
 end
 
 tree = Tree.new((0..5).to_a)
