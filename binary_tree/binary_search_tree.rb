@@ -180,20 +180,14 @@ class Tree
     ans
   end
 
-  # smell
-  def postorder(node = @root, &block)
-    nodes = post_ord_rec(node)
-    eval_nodes(nodes, &block)
-  end
-
-  def post_ord_rec(node)
+  def postorder(node = @root, ans = [], &block)
     return [] unless node
 
-    nodes = []
-    nodes += post_ord_rec(node.left) if node.left
-    nodes += post_ord_rec(node.right) if node.right
-    nodes += [node]
-    nodes
+    block = proc { |i| i.data } unless block_given?
+
+    preorder(node.left, ans, &block)
+    preorder(node.right, ans, &block)
+    ans << block.call(node)
   end
 
   def height(node)
