@@ -99,6 +99,7 @@ class Tree
     end
   end
 
+  # smell
   def delete(value)
     return unless find(value)
 
@@ -152,6 +153,7 @@ class Tree
     end
   end
 
+  # smell
   def level_order(node = @root, &block)
     nodes = level_ord_rec(node)
     eval_nodes(nodes, &block)
@@ -168,6 +170,7 @@ class Tree
     nodes
   end
 
+  # smell
   def inorder(node = @root, &block)
     nodes = in_ord_rec(node)
     eval_nodes(nodes, &block)
@@ -183,6 +186,7 @@ class Tree
     nodes
   end
 
+  # smell
   def preorder(node = @root, &block)
     nodes = pre_ord_rec(node)
     eval_nodes(nodes, &block)
@@ -198,6 +202,7 @@ class Tree
     nodes
   end
 
+  # smell
   def postorder(node = @root, &block)
     nodes = post_ord_rec(node)
     eval_nodes(nodes, &block)
@@ -221,6 +226,7 @@ class Tree
     end.max
   end
 
+  # smell
   def depth(node)
     path(@root, node.data).size - 1
   end
