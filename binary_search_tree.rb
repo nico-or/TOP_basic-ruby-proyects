@@ -236,6 +236,10 @@ class Tree
       nodes += path(start.right, target)
     end
   end
+
+  def balanced?
+    level_order { |i| (height(i.right) - height(i.left)).abs > 1 }.none?
+  end
 end
 
 tree = Tree.new((0..5).to_a)
