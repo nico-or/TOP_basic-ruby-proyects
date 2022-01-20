@@ -143,6 +143,14 @@ class Tree
       new_node
     end
   end
+
+  def eval_nodes(nodes, &block)
+    if block_given?
+      nodes.map { |i| block.call(i) }
+    else
+      nodes.map { |i| i.data }
+    end
+  end
 end
 
 tree = Tree.new((0..5).to_a)
