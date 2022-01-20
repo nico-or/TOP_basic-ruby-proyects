@@ -169,20 +169,15 @@ class Tree
     ans
   end
 
-  # smell
-  def preorder(node = @root, &block)
-    nodes = pre_ord_rec(node)
-    eval_nodes(nodes, &block)
-  end
-
-  def pre_ord_rec(node)
+  def preorder(node = @root, ans = [], &block)
     return [] unless node
 
-    nodes = []
-    nodes += [node]
-    nodes += pre_ord_rec(node.left) if node.left
-    nodes += pre_ord_rec(node.right) if node.right
-    nodes
+    block = proc { |i| i.data } unless block_given?
+
+    ans << block.call(node)
+    preorder(node.left, ans, &block)
+    preorder(node.right, ans, &block)
+    ans
   end
 
   # smell
