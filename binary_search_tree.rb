@@ -240,6 +240,12 @@ class Tree
   def balanced?
     level_order { |i| (height(i.right) - height(i.left)).abs > 1 }.none?
   end
+
+  def rebalance
+    return if balanced?
+
+    @root = build_tree level_order { |e| e.data }
+  end
 end
 
 tree = Tree.new((0..5).to_a)
