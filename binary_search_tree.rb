@@ -194,6 +194,20 @@ class Tree
     nodes += pre_ord_rec(node.right) if node.right
     nodes
   end
+
+  def postorder(node = @root, &block)
+    nodes = post_ord_rec(node)
+    eval_nodes(nodes, &block)
+  end
+
+  def post_ord_rec(node)
+    return [] unless node
+    nodes = []
+    nodes += post_ord_rec(node.left) if node.left
+    nodes += post_ord_rec(node.right) if node.right
+    nodes += [node]
+    nodes
+  end
 end
 
 tree = Tree.new((0..5).to_a)
