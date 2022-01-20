@@ -166,6 +166,20 @@ class Tree
     nodes += level_ord_rec(node.right) if node.right
     nodes
   end
+
+  def inorder(node = @root, &block)
+    nodes = in_ord_rec(node)
+    eval_nodes(nodes, &block)
+  end
+
+  def in_ord_rec(node)
+    return [] unless node
+    nodes = []
+    nodes += in_ord_rec(node.left) if node.left
+    nodes += [node]
+    nodes += in_ord_rec(node.right) if node.right
+    nodes
+  end
 end
 
 tree = Tree.new((0..5).to_a)
