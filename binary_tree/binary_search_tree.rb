@@ -250,13 +250,3 @@ class Tree
     @root = build_tree level_order(&:data)
   end
 end
-
-tree = Tree.new((0..5).to_a)
-tree.pretty_print
-
-array = (0..10).to_a.shuffle
-tree = Tree.new([array.pop])
-array.each { |i| tree.insert(i) }
-tree.pretty_print
-tree.rebalance
-tree.pretty_print
