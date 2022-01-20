@@ -158,20 +158,15 @@ class Tree
     nodes
   end
 
-  # smell
-  def inorder(node = @root, &block)
-    nodes = in_ord_rec(node)
-    eval_nodes(nodes, &block)
-  end
-
-  def in_ord_rec(node)
+  def inorder(node = @root, ans = [], &block)
     return [] unless node
 
-    nodes = []
-    nodes += in_ord_rec(node.left) if node.left
-    nodes += [node]
-    nodes += in_ord_rec(node.right) if node.right
-    nodes
+    block = proc { |i| i.data } unless block_given?
+
+    inorder(node.left, ans, &block)
+    ans << block.call(node)
+    inorder(node.right, ans, &block)
+    ans
   end
 
   # smell
