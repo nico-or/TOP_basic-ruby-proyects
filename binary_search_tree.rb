@@ -216,6 +216,26 @@ class Tree
       height(child)
     end.max
   end
+
+  def depth(node)
+    #height(@root) - height(node)
+    path(@root, node.data).size - 1
+  end
+
+  def path(start, target)
+    return unless find(target, start)
+
+    return [start] if start.data == target
+
+    nodes = []
+    nodes << start
+
+    if start.left && find(target, start.left)
+      nodes += path(start.left, target)
+    elsif start.right && find(target, start.right)
+      nodes += path(start.right, target)
+    end
+  end
 end
 
 tree = Tree.new((0..5).to_a)
