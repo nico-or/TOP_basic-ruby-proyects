@@ -148,7 +148,7 @@ class Tree
     if block_given?
       nodes.map { |i| block.call(i) }
     else
-      nodes.map { |i| i.data }
+      nodes.map(&:data)
     end
   end
 
@@ -159,6 +159,7 @@ class Tree
 
   def level_ord_rec(node)
     return [] unless node
+
     nodes = []
     nodes << node if node == @root
     nodes += node.childrens.compact
@@ -174,6 +175,7 @@ class Tree
 
   def in_ord_rec(node)
     return [] unless node
+
     nodes = []
     nodes += in_ord_rec(node.left) if node.left
     nodes += [node]
@@ -188,6 +190,7 @@ class Tree
 
   def pre_ord_rec(node)
     return [] unless node
+
     nodes = []
     nodes += [node]
     nodes += pre_ord_rec(node.left) if node.left
@@ -202,6 +205,7 @@ class Tree
 
   def post_ord_rec(node)
     return [] unless node
+
     nodes = []
     nodes += post_ord_rec(node.left) if node.left
     nodes += post_ord_rec(node.right) if node.right
@@ -218,7 +222,6 @@ class Tree
   end
 
   def depth(node)
-    #height(@root) - height(node)
     path(@root, node.data).size - 1
   end
 
@@ -244,9 +247,16 @@ class Tree
   def rebalance
     return if balanced?
 
-    @root = build_tree level_order { |e| e.data }
+    @root = build_tree level_order(&:data)
   end
 end
 
 tree = Tree.new((0..5).to_a)
+tree.pretty_print
+
+array = (0..10).to_a.shuffle
+tree = Tree.new([array.pop])
+array.each { |i| tree.insert(i) }
+tree.pretty_print
+tree.rebalance
 tree.pretty_print
