@@ -151,6 +151,21 @@ class Tree
       nodes.map { |i| i.data }
     end
   end
+
+  def level_order(node = @root, &block)
+    nodes = level_ord_rec(node)
+    eval_nodes(nodes, &block)
+  end
+
+  def level_ord_rec(node)
+    return [] unless node
+    nodes = []
+    nodes << node if node == @root
+    nodes += node.childrens.compact
+    nodes += level_ord_rec(node.left) if node.left
+    nodes += level_ord_rec(node.right) if node.right
+    nodes
+  end
 end
 
 tree = Tree.new((0..5).to_a)
