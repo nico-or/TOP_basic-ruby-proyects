@@ -180,6 +180,20 @@ class Tree
     nodes += in_ord_rec(node.right) if node.right
     nodes
   end
+
+  def preorder(node = @root, &block)
+    nodes = pre_ord_rec(node)
+    eval_nodes(nodes, &block)
+  end
+
+  def pre_ord_rec(node)
+    return [] unless node
+    nodes = []
+    nodes += [node]
+    nodes += pre_ord_rec(node.left) if node.left
+    nodes += pre_ord_rec(node.right) if node.right
+    nodes
+  end
 end
 
 tree = Tree.new((0..5).to_a)
