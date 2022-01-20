@@ -145,28 +145,16 @@ class Tree
     end
   end
 
-  def eval_nodes(nodes, &block)
-    if block_given?
-      nodes.map { |i| block.call(i) }
-    else
-      nodes.map(&:data)
-    end
-  end
-
-  # smell
   def level_order(node = @root, &block)
-    nodes = level_ord_rec(node)
-    eval_nodes(nodes, &block)
-  end
-
-  def level_ord_rec(node)
-    return [] unless node
+    block = proc { |i| i.data } unless block_given?
 
     nodes = []
-    nodes << node if node == @root
-    nodes += node.childrens.compact
-    nodes += level_ord_rec(node.left) if node.left
-    nodes += level_ord_rec(node.right) if node.right
+    queue = [node]
+    until queue.empty?
+      current = queue.shift
+      nodes << block.call(current)
+      queue.push(*current.childrens) unless current.child_count.zero?
+    end
     nodes
   end
 
