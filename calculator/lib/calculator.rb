@@ -1,5 +1,5 @@
 class Calculator
-  def add(a, b)
-    a + b
+  def add(*values)
+    values.reduce(:+)
   end
 end
