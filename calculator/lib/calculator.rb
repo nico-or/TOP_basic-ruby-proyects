@@ -6,4 +6,8 @@ class Calculator
   def subtract(*values)
     values.reduce(:-)
   end
+
+  def multiply(*values)
+    values.reduce(:*)
+  end
 end
