@@ -10,4 +10,8 @@ class Calculator
   def multiply(*values)
     values.reduce(:*)
   end
+
+  def divide(*values)
+    values.map(&:to_f).reduce(:/)
+  end
 end
