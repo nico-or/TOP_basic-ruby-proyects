@@ -15,11 +15,13 @@ class Game
 
   def play
     loop do
+      board.show
       turn(board, players.first)
       break if board.gameover?
 
       players.rotate!
     end
+    board.show
     game_over
   end
 

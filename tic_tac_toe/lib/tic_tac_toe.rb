@@ -1,10 +1,9 @@
 class Board
   def initialize
     @board = Array.new(3) { Array.new(3, ' ') }
-    self.show
     @available_moves = (
       (('a'..'c').to_a).product(('1'..'3').to_a)
-    ).map { |i| i.join('') }
+    ).map(&:join)
     @winner = 'player'
   end
 
@@ -21,25 +20,30 @@ class Board
     column, row = parse_move(move)
     @board[row][column] = char
     @available_moves.delete(move)
-    self.show
   end
 
   def winner
     @winner
   end
 
-  private
-  def parse_move(move)
-    [move[0].ord - 'a'.ord, move[1].to_i - 1]
-  end
-
-  public
   def valid_move?(move)
     return false unless @available_moves.include? move
     true
   end
 
+  def gameover?
+    if  self.tie? || self.row_win? || self.column_win? || self.diagonal_win?
+      return true
+    end
+    false
+  end
+
   private
+
+  def parse_move(move)
+    [move[0].ord - 'a'.ord, move[1].to_i - 1]
+  end
+
   def tie?
     if @available_moves.length == 0
       @winner = 'tie'
@@ -71,13 +75,5 @@ class Board
     diag1 = (0..2).map {|i| @board.dig(i, i)}
     diag2 = (0..2).map {|i| @board.dig(2 - i, i)}
     self.allsame?(diag1) || self.allsame?(diag2)
-  end
-
-  public
-  def gameover?
-    if  self.tie? || self.row_win? || self.column_win? || self.diagonal_win?
-      return true
-    end
-    false
   end
 end
