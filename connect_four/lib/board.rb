@@ -5,6 +5,7 @@ class Board
     @rows = rows
     @cols = cols
     @board = Array.new(rows) { Array.new(cols, ' ') }
+    @gameover = false
   end
 
   def show
@@ -18,10 +19,11 @@ class Board
 
   def add_move(move, player)
     column = move.to_i - 1
-    i = 0
-    i += 1 while @board[i][column] != ' '
+    row = 0
+    row += 1 while @board[row][column] != ' '
 
-    @board[i][column] = player.char
+    @board[row][column] = player.char
+    update_status(row, column, player)
   end
 
   def valid_move?(move)
@@ -31,6 +33,10 @@ class Board
   end
 
   def game_over?
-    false
+    @gameover
   end
+
+  private
+
+  def update_status(row, col, player); end
 end

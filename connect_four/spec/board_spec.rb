@@ -3,6 +3,8 @@ require_relative '../lib/board'
 describe Board do
 
   subject(:game_board) { described_class.new }
+  let(:player1) { double('Player', char: 'x') }
+  let(:player2) { double('Player', char: 'o') }
 
   describe '#valid_move?' do
     context 'when given a valid move' do
@@ -41,8 +43,6 @@ describe Board do
 
     subject(:small_board) { described_class.new(2,3) }
     # => [[' ', ' ', ' '],[' ', ' ', ' ']]
-    let(:player1) { double('Player', char: 'x') }
-    let(:player2) { double('Player', char: 'o') }
 
     context 'when reciving a single input' do
       it 'updates the board' do
@@ -75,6 +75,25 @@ describe Board do
           expected_board = [['x', ' ', ' '], ['o', ' ', ' ']]
           expect(new_board).to eq(expected_board)
         end
+      end
+    end
+  end
+
+  describe '#game_over?' do
+    context 'when a game starts' do
+      it 'returns false' do
+        status = game_board.game_over?
+        expect(status).to eq(false)
+      end
+    end
+    
+    context 'when there isn\'t a winner' do
+      it 'returns false' do
+        game_board.add_move(1, player1)
+        game_board.add_move(2, player2)
+        game_board.add_move(1, player1)
+        status = game_board.game_over?
+        expect(status).to eq(false)
       end
     end
   end
