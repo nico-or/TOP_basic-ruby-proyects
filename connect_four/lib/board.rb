@@ -20,8 +20,10 @@ class Board
     # i guess?
   end
 
-  def valid_move?(_move)
-    false
+  def valid_move?(move)
+    return false unless move.respond_to?(:to_i)
+
+    (1..@cols).include? move.to_i
   end
 
   def game_over?
