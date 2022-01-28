@@ -39,7 +39,7 @@ class Board
   private
 
   def update_status(row, col, player)
-    @gameover = horizontal_win(row, player.char)
+    @gameover = horizontal_win(row, player.char) || vertical_win(col, player.char)
   end
 
   def horizontal_win(row, char)
@@ -47,6 +47,16 @@ class Board
     @board[row].each do |col|
       sum = 0 if col != char
       sum += 1 if col == char
+      return true if sum == 4
+    end
+    false
+  end
+
+  def vertical_win(col, char)
+    sum = 0
+    @board.each do |row|
+      sum = 0 if row[col] != char
+      sum += 1 if row[col] == char
       return true if sum == 4
     end
     false

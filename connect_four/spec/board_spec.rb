@@ -104,5 +104,13 @@ describe Board do
         expect(status).to eq(true)
       end
     end
+
+    context 'when 4 in a column' do
+      it 'returns true' do
+        4.times { game_board.add_move(3, player1) }
+        status = game_board.game_over?
+        expect(status).to eq(true)
+      end
+    end
   end
 end
