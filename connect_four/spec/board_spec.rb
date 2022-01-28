@@ -86,7 +86,7 @@ describe Board do
         expect(status).to eq(false)
       end
     end
-    
+
     context 'when there isn\'t a winner' do
       it 'returns false' do
         game_board.add_move(1, player1)
@@ -94,6 +94,14 @@ describe Board do
         game_board.add_move(1, player1)
         status = game_board.game_over?
         expect(status).to eq(false)
+      end
+    end
+
+    context 'when 4 in a row' do
+      it 'returns true' do
+        1.upto(4) { |row| game_board.add_move(row, player1) }
+        status = game_board.game_over?
+        expect(status).to eq(true)
       end
     end
   end
