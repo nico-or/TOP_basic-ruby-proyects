@@ -17,7 +17,11 @@ class Board
   end
 
   def add_move(move, player)
-    # i guess?
+    column = move.to_i - 1
+    i = 0
+    i += 1 while @board[i][column] != ' '
+
+    @board[i][column] = player.char
   end
 
   def valid_move?(move)

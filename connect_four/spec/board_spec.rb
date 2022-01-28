@@ -36,4 +36,46 @@ describe Board do
       end
     end
   end
+
+  describe '#add_move' do
+
+    subject(:small_board) { described_class.new(2,3) }
+    # => [[' ', ' ', ' '],[' ', ' ', ' ']]
+    let(:player1) { double('Player', char: 'x') }
+    let(:player2) { double('Player', char: 'o') }
+
+    context 'when reciving a single input' do
+      it 'updates the board' do
+        move = '2'
+        small_board.add_move(move, player1)
+        new_board = small_board.board
+        expected_board = [[' ', 'x', ' '], [' ', ' ', ' ']]
+        expect(new_board).to eq(expected_board)
+      end
+    end
+    context 'when reciving two moves' do
+      context 'different columns' do
+        it 'updates the board' do
+          move = '2'
+          small_board.add_move(move, player1)
+          move = '1'
+          small_board.add_move(move, player2)
+          new_board = small_board.board
+          expected_board = [['o',   'x', ' '], [' ', ' ', ' ']]
+          expect(new_board).to eq(expected_board)
+        end
+      end
+      context 'same column' do
+        it 'updates the board' do
+          move = '1'
+          small_board.add_move(move, player1)
+          move = '1'
+          small_board.add_move(move, player2)
+          new_board = small_board.board
+          expected_board = [['x', ' ', ' '], ['o', ' ', ' ']]
+          expect(new_board).to eq(expected_board)
+        end
+      end
+    end
+  end
 end

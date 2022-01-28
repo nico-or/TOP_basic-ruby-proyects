@@ -33,7 +33,7 @@ class Game
     loop do
       move = player_input(player)
       if @board.valid_move? move
-        @board.add_move(move, player.char)
+        @board.add_move(move, player)
         break
       end
       print "Invalid move, try again\n"
