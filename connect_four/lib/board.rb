@@ -29,11 +29,17 @@ class Board
   def valid_move?(move)
     return false unless move.respond_to?(:to_i)
 
-    (1..@cols).include? move.to_i
+    col = move.to_i - 1
+    !column_full?(col) && (0...@cols).include?(col)
   end
 
   def game_over?
     @gameover
+  end
+
+  def column_full?(col)
+    board.each { |row| return false if row[col] == ' ' }
+    true
   end
 
   private

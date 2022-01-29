@@ -32,7 +32,7 @@ class Game
   def turn(player)
     loop do
       move = player_input(player)
-      if @board.valid_move? move
+      if @board.valid_move?(move)
         @board.add_move(move, player)
         break
       end

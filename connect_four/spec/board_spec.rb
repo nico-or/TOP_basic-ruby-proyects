@@ -161,4 +161,23 @@ describe Board do
       end
     end
   end
+
+  describe '#column_full?' do
+
+    context 'when column is not full' do
+      it 'returns false' do
+        3.times { game_board.add_move('2', player1) }
+        full_status = game_board.column_full?(1)
+        expect(full_status).to eq(false)
+      end
+    end
+
+    context 'when column is full' do
+      it 'returns true' do
+        6.times { game_board.add_move('2', player1) }
+        full_status = game_board.column_full?(1)
+        expect(full_status).to eq(true)
+      end
+    end
+  end
 end
