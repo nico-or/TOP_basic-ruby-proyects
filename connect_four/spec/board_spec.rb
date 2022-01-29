@@ -80,36 +80,84 @@ describe Board do
   end
 
   describe '#game_over?' do
-    context 'when a game starts' do
-      it 'returns false' do
-        status = game_board.game_over?
-        expect(status).to eq(false)
-      end
-    end
-
     context 'when there isn\'t a winner' do
-      it 'returns false' do
-        game_board.add_move(1, player1)
-        game_board.add_move(2, player2)
-        game_board.add_move(1, player1)
-        status = game_board.game_over?
-        expect(status).to eq(false)
+      context 'when a game starts' do
+        it 'returns false' do
+          status = game_board.game_over?
+          expect(status).to eq(false)
+        end
+      end
+
+      context '3 plays in' do
+        it 'returns false' do
+          game_board.add_move(1, player1)
+          game_board.add_move(2, player2)
+          game_board.add_move(1, player1)
+          status = game_board.game_over?
+          expect(status).to eq(false)
+        end
+      end
+
+      context 'when 3 in a upward diagonal' do
+        it 'returns true' do
+          (1..4).each do |col|
+            (col - 1).times { game_board.add_move(col, player1) }
+            game_board.add_move(col, player2)
+          end
+          status = game_board.game_over?
+          expect(status).to eq(true)
+        end
+      end
+
+      context 'when 3 in a downward diagonal' do
+        it 'returns true' do
+          (1..4).each do |col|
+            (4 - col).times { game_board.add_move(col, player1) }
+            game_board.add_move(col, player2)
+          end
+          status = game_board.game_over?
+          expect(status).to eq(true)
+        end
       end
     end
 
-    context 'when 4 in a row' do
-      it 'returns true' do
-        1.upto(4) { |row| game_board.add_move(row, player1) }
-        status = game_board.game_over?
-        expect(status).to eq(true)
+    context 'when there is a winner' do
+      context 'when 4 in a row' do
+        it 'returns true' do
+          1.upto(4) { |row| game_board.add_move(row, player1) }
+          status = game_board.game_over?
+          expect(status).to eq(true)
+        end
       end
-    end
 
-    context 'when 4 in a column' do
-      it 'returns true' do
-        4.times { game_board.add_move(3, player1) }
-        status = game_board.game_over?
-        expect(status).to eq(true)
+      context 'when 4 in a column' do
+        it 'returns true' do
+          4.times { game_board.add_move(3, player1) }
+          status = game_board.game_over?
+          expect(status).to eq(true)
+        end
+      end
+
+      context 'when 4 in a upward diagonal' do
+        it 'returns true' do
+          (1..4).each do |col|
+            (col - 1).times { game_board.add_move(col, player1) }
+            game_board.add_move(col, player2)
+          end
+          status = game_board.game_over?
+          expect(status).to eq(true)
+        end
+      end
+
+      context 'when 4 in a downward diagonal' do
+        it 'returns true' do
+          (1..4).each do |col|
+            (4 - col).times { game_board.add_move(col, player1) }
+            game_board.add_move(col, player2)
+          end
+          status = game_board.game_over?
+          expect(status).to eq(true)
+        end
       end
     end
   end

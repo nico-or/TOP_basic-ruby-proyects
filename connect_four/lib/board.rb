@@ -39,7 +39,9 @@ class Board
   private
 
   def update_status(row, col, player)
-    @gameover = horizontal_win(row, player.char) || vertical_win(col, player.char)
+    @gameover = horizontal_win(row, player.char) ||
+                vertical_win(col, player.char) ||
+                diagonal_win(row, col, player.char)
   end
 
   def horizontal_win(row, char)
@@ -58,6 +60,42 @@ class Board
       sum = 0 if row[col] != char
       sum += 1 if row[col] == char
       return true if sum == 4
+    end
+    false
+  end
+
+  def diagonal_win(row, col, char)
+    upward_diagonal(row, col, char) || downward_diagonal(row, col, char)
+  end
+
+  def upward_diagonal(row, col, char)
+    delta = [row, col].min
+    current_row = row - delta
+    current_col = col - delta
+    sum = 0
+    while (value = @board.dig(current_row, current_col))
+      sum += 0 if value != char
+      sum += 1 if value == char
+      return true if sum == 4
+
+      current_row += 1
+      current_col += 1
+    end
+    false
+  end
+
+  def downward_diagonal(row, col, char)
+    delta = [row, @cols - col].min
+    current_row = row - delta
+    current_col = col + delta
+    sum = 0
+    while (value = @board.dig(current_row, current_col))
+      sum += 0 if value != char
+      sum += 1 if value == char
+      return true if sum == 4
+
+      current_row += 1
+      current_col -= 1
     end
     false
   end
