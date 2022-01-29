@@ -10,11 +10,11 @@ class Board
   end
 
   def show
-    puts (1..@cols).to_a.join(' ')
-    puts '=' * ((2 * @cols) - 1)
+    puts ' ' + (1..@cols).to_a.join(' ') + ' '
+    puts '=' + '=' * ((2 * @cols) - 1) + '='
     board.reverse.each do |row|
-      puts row.join('|')
-      puts '-' * ((2 * @cols) - 1)
+      puts '|' + row.join('|') + '|'
+      puts '-' + '-' * ((2 * @cols) - 1) + '-'
     end
   end
 
