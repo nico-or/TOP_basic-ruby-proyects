@@ -42,6 +42,15 @@ class Board
     true
   end
 
+  def full?
+    board.each do |row|
+      row.each do |col|
+        return false if col == ' '
+      end
+    end
+    true
+  end
+
   private
 
   def update_status(row, col, player)

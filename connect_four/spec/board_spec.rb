@@ -180,4 +180,24 @@ describe Board do
       end
     end
   end
+
+  describe '#full?' do
+    subject(:small_board) { described_class.new(2, 3) }
+
+    context 'when board is not full' do
+      it 'returns false' do
+        2.times { 2.times { |i| small_board.add_move(i.to_s, player1) } }
+        full_status = small_board.full?
+        expect(full_status).to eq(false)
+      end
+    end
+
+    context 'when board is full' do
+      it 'returns true' do
+        2.times { 3.times { |i| small_board.add_move(i.to_s, player1) } }
+        full_status = small_board.full?
+        expect(full_status).to eq(true)
+      end
+    end
+  end
 end
