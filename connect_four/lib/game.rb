@@ -10,6 +10,7 @@ class Player
 end
 
 class Game
+  attr_reader :board
   def initialize
     @board = Board.new
     @players = [
@@ -20,9 +21,9 @@ class Game
 
   def play
     loop do
-      @board.show
+      board.show
       turn(@players.first)
-      break if @board.game_over?
+      break if board.game_over?
 
       @players.rotate!
     end
@@ -32,8 +33,8 @@ class Game
   def turn(player)
     loop do
       move = player_input(player)
-      if @board.valid_move?(move)
-        @board.add_move(move, player)
+      if board.valid_move?(move)
+        board.add_move(move, player)
         break
       end
       print "Invalid move, try again\n"
@@ -47,5 +48,11 @@ class Game
 
   def game_over
     puts 'Game Over.'
+    board.show
+    if board.full?
+      puts 'Tie.'
+    else
+      puts "#{board.winner.name} wins."
+    end
   end
 end

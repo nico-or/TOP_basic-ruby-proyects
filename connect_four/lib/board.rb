@@ -1,11 +1,12 @@
 class Board
-  attr_reader :board
+  attr_reader :board, :winner
 
   def initialize(rows = 6, cols = 7)
     @rows = rows
     @cols = cols
     @board = Array.new(rows) { Array.new(cols, ' ') }
     @gameover = false
+    @winner = nil
   end
 
   def show
@@ -54,9 +55,19 @@ class Board
   private
 
   def update_status(row, col, player)
-    @gameover = horizontal_win(row, player.char) ||
-                vertical_win(col, player.char) ||
-                diagonal_win(row, col, player.char)
+    if player_win?(row, col, player)
+      @gameover = true
+      @winner = player
+    elsif full?
+      @gameover = true
+      @winner = nil
+    end
+  end
+
+  def player_win?(row, col, player)
+    horizontal_win(row, player.char) ||
+      vertical_win(col, player.char) ||
+      diagonal_win(row, col, player.char)
   end
 
   def horizontal_win(row, char)
@@ -89,7 +100,7 @@ class Board
     current_col = col - delta
     sum = 0
     while (value = @board.dig(current_row, current_col))
-      sum += 0 if value != char
+      sum = 0 if value != char
       sum += 1 if value == char
       return true if sum == 4
 
@@ -105,7 +116,7 @@ class Board
     current_col = col + delta
     sum = 0
     while (value = @board.dig(current_row, current_col))
-      sum += 0 if value != char
+      sum = 0 if value != char
       sum += 1 if value == char
       return true if sum == 4
 
