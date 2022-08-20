@@ -35,7 +35,7 @@ class Game
 
   def turn(board, player)
     loop do
-      move = player_input(player)
+      move = player.get_input
       if board.valid_move? move
         board.add_move(move, player.char)
         break
@@ -43,10 +43,5 @@ class Game
         print "Invalid move, try again\n"
       end
     end
-  end
-
-  def player_input(player)
-    print "#{player.name} (#{player.char}), enter your move: "
-    gets.chomp
   end
 end
