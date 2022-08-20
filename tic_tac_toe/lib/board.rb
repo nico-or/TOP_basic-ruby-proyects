@@ -1,17 +1,17 @@
 class Board
   def initialize
     @board = Array.new(3) { Array.new(3, ' ') }
-    @available_moves = (
-      (('a'..'c').to_a).product(('1'..'3').to_a)
-    ).map(&:join)
+    @available_moves =
+      ('a'..'c').to_a.product(('1'..'3').to_a)
+                .map(&:join)
     @winner = 'player'
   end
 
   def show
-    puts "   a   b   c "
+    puts '   a   b   c '
     @board.each_with_index do |row, index|
-      puts (index+1).to_s + '  ' + row.join(' | ')
-      puts '  ' + Array.new(3,'---').join('+')  unless index == 2
+      puts (index + 1).to_s + '  ' + row.join(' | ')
+      puts '  ' + Array.new(3, '---').join('+') unless index == 2
     end
     puts
   end
@@ -28,6 +28,7 @@ class Board
 
   def valid_move?(move)
     return false unless @available_moves.include? move
+
     true
   end
 
@@ -52,28 +53,29 @@ class Board
     false
   end
 
-  def allsame? (row)
-    return false if row[0] == " "
-    row.all? {|i| i == row[0]}
+  def allsame?(row)
+    return false if row[0] == ' '
+
+    row.all? { |i| i == row[0] }
   end
 
   def row_win?
     @board.each do |row|
-      return true if self.allsame? row
+      return true if allsame? row
     end
     false
   end
 
   def column_win?
     @board.transpose.any? do |row|
-      return true if self.allsame? row
+      return true if allsame? row
     end
     false
   end
 
   def diagonal_win?
-    diag1 = (0..2).map {|i| @board.dig(i, i)}
-    diag2 = (0..2).map {|i| @board.dig(2 - i, i)}
-    self.allsame?(diag1) || self.allsame?(diag2)
+    diag1 = (0..2).map { |i| @board.dig(i, i) }
+    diag2 = (0..2).map { |i| @board.dig(2 - i, i) }
+    allsame?(diag1) || allsame?(diag2)
   end
 end

@@ -25,7 +25,7 @@ class Game
   end
 
   def game_over
-    puts "GAME OVER"
+    puts 'GAME OVER'
     if board.winner == 'tie'
       puts "It's a tie"
     else
