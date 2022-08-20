@@ -1,5 +1,3 @@
-require_relative '../lib/tic_tac_toe'
-
 describe Board do
 
   subject(:game_board) { described_class.new }
