@@ -1,9 +1,8 @@
+require_relative 'player'
 require_relative 'tic_tac_toe'
 
 class Game
   attr_reader :board, :players
-
-  Player = Struct.new(:name, :char)
 
   def initialize
     @board = Board.new
