@@ -1,6 +1,10 @@
 class Board
   def initialize
     @board = Array.new(3) { Array.new(3, ' ') }
+
+    @printer = BoardPrinter.new
+    @printer.board = @board
+
     @available_moves =
       ('a'..'c').to_a.product(('1'..'3').to_a)
                 .map(&:join)
@@ -8,12 +12,7 @@ class Board
   end
 
   def show
-    puts '   a   b   c '
-    @board.each_with_index do |row, index|
-      puts (index + 1).to_s + '  ' + row.join(' | ')
-      puts '  ' + Array.new(3, '---').join('+') unless index == 2
-    end
-    puts
+    @printer.show
   end
 
   def add_move(move, char)
