@@ -1,5 +1,4 @@
 require_relative 'board'
-require_relative 'board_printer'
 require_relative 'player'
 
 class Game
