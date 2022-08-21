@@ -2,6 +2,7 @@ class BoardPrinter
   attr_accessor :board
 
   def show
+    puts header
     puts divisor
     board.each do |row|
       puts "|#{format_row(row)}|"
@@ -13,6 +14,14 @@ class BoardPrinter
 
   def board_cols
     board.first.length
+  end
+
+  def header
+    range = 0.upto(board_cols - 1)
+    row = range.map { |i| ('a'.ord + i).chr }
+               .map { |char| " #{char} " }
+               .join(' ')
+    " #{row} ".rstrip
   end
 
   def divisor

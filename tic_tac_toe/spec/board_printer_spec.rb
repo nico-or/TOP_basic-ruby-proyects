@@ -7,6 +7,7 @@ describe BoardPrinter do
         it 'displays a single cell' do
           board_printer.board = [[nil]]
           expected = <<~out
+              a
             +---+
             |   |
             +---+
@@ -22,6 +23,7 @@ describe BoardPrinter do
         it 'displays a single cell' do
           board_printer.board = [['x']]
           expected = <<~out
+              a
             +---+
             | x |
             +---+
@@ -38,6 +40,7 @@ describe BoardPrinter do
       it 'displays a two cell board cell' do
         board_printer.board = [['x', nil]]
         expected = <<~out
+            a   b
           +---+---+
           | x |   |
           +---+---+
@@ -53,6 +56,7 @@ describe BoardPrinter do
       it 'displays a two cell board cell' do
         board_printer.board = [['x', nil], [nil, 'o']]
         expected = <<~out
+            a   b
           +---+---+
           | x |   |
           +---+---+
