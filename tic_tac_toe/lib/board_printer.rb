@@ -11,12 +11,12 @@ class BoardPrinter
 
   private
 
-  def row_size
+  def board_cols
     board.first.length
   end
 
   def divisor
-    n = row_size + 1
+    n = board_cols + 1
     n.times.map { '+' }
            .join('---')
   end
