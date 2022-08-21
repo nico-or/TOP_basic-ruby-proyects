@@ -2,15 +2,19 @@ class BoardPrinter
   attr_accessor :board
 
   def show
-    puts header
-    puts divisor
-    board.each do |row|
-      puts "|#{format_row(row)}|"
-      puts divisor
+    puts "  #{header}"
+    puts "  #{divisor}"
+    board.each.with_index do |row, index|
+      puts "#{row_index(index)} |#{format_row(row)}|"
+      puts "  #{divisor}"
     end
   end
 
   private
+
+  def board_rows
+    board.length
+  end
 
   def board_cols
     board.first.length
@@ -38,5 +42,9 @@ class BoardPrinter
     tmp = row.map { format_cell(_1) }
              .join(' | ')
     " #{tmp} "
+  end
+
+  def row_index(index)
+    index + 1
   end
 end

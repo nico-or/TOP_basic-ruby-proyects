@@ -5,12 +5,12 @@ describe BoardPrinter do
     it 'displays a two cell board cell' do
       board_printer.board = [['x', nil], [nil, 'o']]
       expected = <<~out
-          a   b
-        +---+---+
-        | x |   |
-        +---+---+
-        |   | o |
-        +---+---+
+            a   b
+          +---+---+
+        1 | x |   |
+          +---+---+
+        2 |   | o |
+          +---+---+
       out
 
       expect do
