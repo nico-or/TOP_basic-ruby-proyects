@@ -11,10 +11,6 @@ module TicTacToe
       @winner = 'player'
     end
 
-    def show
-      @printer.show
-    end
-
     def add_move(move, char)
       column, row = parse_move(move)
       @board[row][column] = char
