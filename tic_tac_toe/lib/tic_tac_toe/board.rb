@@ -1,10 +1,9 @@
 module TicTacToe
-  class Board
-    def initialize
-      @board = Array.new(3) { Array.new(3, ' ') }
+  class Board < Board
+    DEFAULT_BOARD_SIZE = 3
 
-      @printer = BoardPrinter.new
-      @printer.board = @board
+    def initialize
+      super(DEFAULT_BOARD_SIZE)
 
       @available_moves =
         ('a'..'c').to_a.product(('1'..'3').to_a)

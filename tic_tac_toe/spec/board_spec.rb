@@ -1,8 +1,7 @@
 describe Board do
-
-  subject(:board) { described_class.new }
-
   describe '#show' do
+    let(:board) { described_class.new(3) }
+
     context 'a new board' do
       it 'prints to stdout' do
         expected = <<~out

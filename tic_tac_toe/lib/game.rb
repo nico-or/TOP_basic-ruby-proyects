@@ -6,7 +6,7 @@ class Game
   attr_reader :board, :players
 
   def initialize
-    @board = Board.new
+    @board = TicTacToe::Board.new
     @players = [
       Player.new('Player 1', 'x'),
       Player.new('Player 2', 'o')

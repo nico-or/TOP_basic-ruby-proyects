@@ -1,6 +1,6 @@
 class Board
-  def initialize
-    @board = Array.new(3) { Array.new(3, ' ') }
+  def initialize(rows, cols = rows)
+    @board = Array.new(rows) { Array.new(cols, ' ') }
 
     @printer = BoardPrinter.new
     @printer.board = @board
